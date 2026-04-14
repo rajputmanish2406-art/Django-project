@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivery Orders</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#f4f6f9;
+padding:20px;
+}
+
+/* heading */
+h2{
+margin-bottom:20px;
+color:#333;
+}
+
+/* order card */
+.order-card{
+background:#fff;
+border-radius:10px;
+padding:20px;
+margin-bottom:20px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* order info */
+.order-info p{
+margin:5px 0;
+}
+
+/* table */
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+table thead{
+background:#333;
+color:white;
+}
+
+table th, table td{
+padding:10px;
+text-align:center;
+border-bottom:1px solid #ddd;
+}
+
+/* buttons */
+.btn{
+display:inline-block;
+padding:10px 16px;
+margin-top:15px;
+border-radius:6px;
+text-decoration:none;
+color:white;
+font-weight:bold;
+transition:0.3s;
+}
+
+/* view button */
+.view-btn{
+background:#007bff;
+}
+
+.view-btn:hover{
+background:#0056b3;
+}
+
+/* delivered button */
+.delivered-btn{
+background:#28a745;
+}
+
+.delivered-btn:hover{
+background:#1e7e34;
+}
+
+/* responsive */
+@media(max-width:600px){
+
+table thead{
+display:none;
+}
+
+table, tbody, tr, td{
+display:block;
+width:100%;
+}
+
+tr{
+margin-bottom:10px;
+background:#fafafa;
+padding:10px;
+border-radius:6px;
+}
+
+td{
+text-align:right;
+padding-left:50%;
+position:relative;
+}
+
+td::before{
+position:absolute;
+left:10px;
+top:10px;
+font-weight:bold;
+text-align:left;
+}
+
+td:nth-child(1)::before{content:"Item";}
+td:nth-child(2)::before{content:"Price";}
+td:nth-child(3)::before{content:"Qty";}
+td:nth-child(4)::before{content:"Subtotal";}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>My Orders</h2>
+
+{% for o in orders %}
+
+<div class="order-card">
+
+<div class="order-info">
+<p><strong>Order #{{ o.id }}</strong></p>
+<p>Address: {{ o.address }}</p>
+<p>Phone: {{ o.phone }}</p>
+<p>Total: ₹{{ o.total_amount }}</p>
+</div>
+
+<h3 style="margin-top:15px;">Items</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>Item</th>
+<th>Price</th>
+<th>Qty</th>
+<th>Subtotal</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for item in o.items.all %}
+<tr>
+<td><strong>{{ item.product.item_name }}</strong></td>
+<td>₹{{ item.price }}</td>
+<td>{{ item.quantity }}</td>
+<td>₹{{ item.subtotal }}</td>
+</tr>
+{% endfor %}
+
+</tbody>
+
+</table>
+
+<a class="btn delivered-btn" href="{% url 'delivery_complete' o.id %}">
+Mark Delivered
+</a>
+
+</div>
+
+{% empty %}
+<p>No orders assigned</p>
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ menu.item_name }} - Tasty Bites</title>
+    <style>
+        :root {
+            --primary: #d32f2f;
+            --secondary: #1976d2;
+            --star-color: #ffc107;
+            --bg: #f8f9fa;
+        }
+
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
+        .main-container { max-width: 1000px; margin: auto; background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+        /* Product Section */
+        .product-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+        .product-image img { width: 100%; border-radius: 12px; object-fit: cover; height: 350px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .product-info h1 { font-size: 2.5rem; margin: 0; color: #222; }
+        .price { font-size: 1.8rem; color: var(--primary); font-weight: bold; margin: 20px 0; }
+        .description { line-height: 1.8; color: #666; font-size: 1.1rem; }
+
+        /* Review Section Styles */
+        .review-header { border-top: 2px solid #eee; padding-top: 30px; margin-top: 30px; }
+        .review-card { background: #fff; border-bottom: 1px solid #eee; padding: 20px 0; }
+        .user-info { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .avatar { width: 45px; height: 45px; background: #e0e0e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #555; }
+        .stars { color: var(--star-color); font-size: 1.1rem; }
+        .date { font-size: 0.85rem; color: #999; margin-left: auto; }
+
+        /* Form Style */
+        .add-review-form { background: #fdfdfd; border: 1px solid #ddd; padding: 20px; border-radius: 10px; margin-bottom: 30px; }
+        textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin: 10px 0; resize: vertical; }
+        .add-btn{ background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .btn-submit:hover { background: #b71c1c; }
+
+        @media (max-width: 768px) { .product-section { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <a href="{% url 'menu' %}"><h3>← Back to Menu</h3></a>
+
+    <div class="product-section">
+        <div class="product-image">
+            <img src="{{ menu.image.url }}" alt="{{ menu.item_name }}">
+        </div>
+        <div class="product-info">
+            <h1>{{ menu.item_name }}</h1>
+            <div class="stars">★★★★★ <span style="color: #666; font-size: 0.9rem;">(Verified Recipe)</span></div>
+            <p class="price">₹{{ menu.price }}</p>
+            <p class="description">
+                {{menu.description}}
+            </p>
+            <!-- <button class="btn-submit" style="width: 100%; font-size: 1.2rem;">Add to Cart</button> -->
+            <button  class="add-btn"  style="width: 100%; font-size: 1.2rem;background-color: #b71c1c;" data-name="{{ menu.item_name }}"
+          data-price="{{ menu.price }}"  onclick="addToCart({{ menu.id }})" >
+          Add to Cart
+        </button>
+        </div>
+    </div>
+
+    <div class="review-header">
+        <h2>Customer Reviews {{ reviews|length }}</h2>
+    </div>
+
+    {% if user.is_authenticated %}
+    <div class="add-review-form">
+        <h4>Share Your Experience</h4>
+        <form method="POST">
+            {% csrf_token %}
+            <label>Rating:</label>
+            <select name="rating" style="padding: 5px; border-radius: 4px;">
+                <option value="5">5 Stars - Excellent</option>
+                <option value="4">4 Stars - Very Good</option>
+                <option value="3">3 Stars - Good</option>
+                <option value="2">2 Stars - Fair</option>
+                <option value="1">1 Star - Poor</option>
+            </select>
+            <textarea name="comment" rows="4" placeholder="How was the taste? Let us know..." required></textarea>
+            <button type="submit" class="btn-submit">Post Review</button>
+        </form>
+    </div>
+    {% else %}
+    <p><a href="/login" style="color: var(--secondary);">Login</a> to write a review.</p>
+    {% endif %}
+     
+
+    <div class="reviews-list">
+         
+        {% if average_rating > 0 %}
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <h1 style="margin: 0;">{{ average_rating|floatformat:1 }}</h1>
+            
+            <div class="star-outer" style="display: inline-block; position: relative; font-size: 24px; color: #ccc;">
+                <div class="star-base">★★★★★</div>
+                <div class="star-inner" style="width: {{ star_percentage }}%; color:gold; overflow:hidden; position:absolute; top: 0; left: 0; white-space: nowrap;">
+                    ★★★★★
+                </div>
+            </div>
+            <span>({{ reviews.count }} reviews)</span>
+        </div>
+    {% else %}
+        <p>No ratings yet. Be the first to review!</p>
+    {% endif %}
+</div>
+
+<hr>
+
+        {% for review in reviews %}
+        <div class="review-card">
+            <div class="user-info">
+                <div class="avatar">{{ review.user.username|slice:":1"|upper }}</div>
+                <div>
+                    <strong>{{ review.user.username }}</strong>
+                    <div class="stars">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= review.rating %}★{% else %}☆{% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+                <span class="date">{{ review.created_at|date:"M d, Y" }}</span>
+            </div>
+            <p style="margin-left: 57px;   color: #444;">{{ review.comment }}</p>
+        </div>
+        {% empty %}
+        <p style="text-align: center; color: #888; margin-top: 20px;">No reviews yet. Be the first to try this dish!</p>
+        {% endfor %}
+    </div>
+</div>
+    <script>
+
+    function addToCart(id)
+    {
+      // var item_name=document.getElementById({{menu.item_name}})
+    fetch("{% url 'add_to_cart' %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "product_id=" + id
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.success){
+            alert("Item added to cart");
+        }else{
+            alert(" Failed");
+        }
+    });
+}
+</script>
+
+</body>
+</html>

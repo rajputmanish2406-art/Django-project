@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Assign Delivery Boy – Order #{{ order.id }}</h2>
+
+<form method="post">
+{% csrf_token %}
+
+<ul style="list-style:none; padding:0;">
+
+  {% for boy in boys %}
+  <li style="margin-bottom:10px; border:1px solid #ddd; padding:10px; border-radius:8px;">
+
+    <label style="cursor:pointer; display:flex; align-items:center; gap:10px;">
+      
+      <input type="radio" name="delivery_boy" value="{{ boy.id }}" required>
+
+      <div>
+        <strong>{{ boy.name }}</strong><br>
+        📞 {{ boy.phone }}
+      </div>
+
+    </label>
+
+  </li>
+  {% endfor %}
+
+</ul>
+
+<button type="submit">Assign</button>
+
+</form>
+</body>
+</html>

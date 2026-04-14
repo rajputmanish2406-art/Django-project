@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f5f6fa;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .payment-box {
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    .amount {
+        font-size: 28px;
+        font-weight: bold;
+        color: #28a745;
+        margin: 20px 0;
+    }
+
+    .details {
+        color: #555;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .pay-btn {
+        background: #007bff;
+        color: white;
+    }
+
+    .pay-btn:hover {
+        background: #0056b3;
+    }
+
+    @media (max-width: 480px) {
+        .payment-box {
+            padding: 20px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="payment-box">
+    <h2>Checkout</h2>
+    
+    <!-- Amount -->
+    <div class="amount">₹{{ amount }}</div>
+
+    <!-- Optional details -->
+    <div class="details">
+        Product: {{ productinfo }} <br>
+        Name: {{ firstname }}
+    </div>
+
+    <!-- Payment Form -->
+    <form action="{{ action }}" method="post">
+        <input type="hidden" name="key" value="{{ key }}">
+        <input type="hidden" name="txnid" value="{{ txnid }}">
+        <input type="hidden" name="amount" value="{{ amount }}">
+        <input type="hidden" name="productinfo" value="{{ productinfo }}">
+        <input type="hidden" name="firstname" value="{{ firstname }}">
+        <input type="hidden" name="email" value="{{ email }}">
+        <input type="hidden" name="phone" value="{{ phone }}">
+        <input type="hidden" name="hash" value="{{ hash }}">
+        <input type="hidden" name="surl" value="{{ surl }}">
+        <input type="hidden" name="furl" value="{{ furl }}">
+
+        <button type="submit" class="btn pay-btn">
+            Pay ₹{{ amount }}
+        </button>
+    </form>
+</div>
+
+</body>
+</html>

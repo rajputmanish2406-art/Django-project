@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu List - Admin Tracking</title>
+    <link rel="stylesheet" href="{% static 'TableAdmin.css' %}">
+</head>
+
+<body>
+
+    <h2>Menu List (Admin Tracking)</h2>
+    <a href="{% url 'admindesh' %}" class="action-btn back-btn">Back </a><br>
+    <a href="{% url 'menu_add' %}" class="action-btn add-btn">ADD New </a><br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Created By</th>
+                <th>Last Updated By</th>
+                <th>Updated At</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in menus %}
+            <tr>
+                <td>{{ m.item_name }}</td>
+                <td>₹{{ m.price|floatformat:2 }}</td>
+                <td>{{ m.category}}</td>
+                <td>{{ m.created_by.username}}</td>
+                <td>{{ m.updated_by.username}}</td>
+                <td>
+                    {% if m.updated_at %}
+                    {{ m.updated_at|date:"Y-m-d H:i" }}
+                    {% else %}
+                    —
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'menu_edit' m.id %}" class="action-btn edit-btn">Edit</a>
+                    <a href="{% url 'menu_delte' m.id %}" class="action-btn delete-btn">Delete</a>
+
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" style="text-align:center; color:#777; padding:30px;">
+                    No menu items found.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'sign up.css' %}">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Delivery Signup</h2>
+    {% if error %}
+    <script>
+        alert("{{ error }}");
+    </script>
+    {% endif %}
+    <div class="login-box">
+    <h2>Sign-up</h2>
+    <form action="/sign_up" method="POST">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="tel" name="phone" placeholder="Phone Number" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button href="signup_delivery.html">Sign up</button>
+    </form>
+  </div>
+
+</body>
+
+</html>

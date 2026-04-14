@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'TableAdmin.css' %}">
+</head>
+<body>
+    <h2>All orders</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Customer Name</th>
+                <th>Customer Phone</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for Cust in customer %}
+            <tr>
+                <td style="width:20px;">#{{Cust.id}}</td>
+                <td>{{Cust.user.username}}</td>
+                <td>{{Cust.phone}}</td>
+               
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    
+</body>
+</html>

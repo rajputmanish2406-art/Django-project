@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Reports</h1>
+            <h4>1. Order Reports</h4>
+            <select onchange="location = this.value;">
+<option value="">Select Report</option>
+<option value="/report/orders/?filter=day">Today PDF</option>
+<option value="/report/orders/?filter=month">Month PDF</option>
+<option value="/report/orders/?filter=year">Year PDF</option>
+</select>
+              <h4>2. Menu Reports</h4>  
+            <a href="/report/menu/"><button>Menu PDF</button></a><br><br>
+            <h3>3. User PDf</h3>
+            <a href="/report/users/"><button> PDF</button></a>
+
+    
+</body>
+</html>

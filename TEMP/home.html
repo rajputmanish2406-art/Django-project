@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Bella Vita - Italian Restaurant</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            padding-top: 70px;
+            /* Navbar fixed hai isliye body ko thoda niche kiya */
+        }
+
+        /* LOgo animation */
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Main text */
+        .logo-main {
+            color: #ffffff;
+        }
+
+        /* Accent text */
+        .logo-accent {
+            color: #f4b41a;
+            margin-left: 4px;
+            position: relative;
+        }
+
+        /* Elegant underline animation */
+        .logo-accent::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0%;
+            height: 2px;
+            background: #f4b41a;
+            transition: 0.4s ease;
+        }
+
+        .logo:hover .logo-accent::after {
+            width: 100%;
+        }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            background: #1c1c1c;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #f4b41a;
+        }
+
+        /* --- Hamburger Icon --- */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: white;
+            margin: 5px;
+            border-radius: 2px;
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 280px;
+            background-color: #1c1c1c;
+            color: white;
+            z-index: 2000;
+            transition: 0.4s ease-in-out;
+            transform: translateX(100%);
+            padding: 80px 30px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+        .sidebar-links {
+            list-style: none;
+        }
+
+        .sidebar-links li {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.4rem;
+            display: block;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 40px;
+            cursor: pointer;
+            color: #f4b41a;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 90vh;
+            background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background: #f4b41a;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #d89f15;
+        }
+
+        /* --- Swiper --- */
+        .swiper {
+            width: 100%;
+            padding: 50px 0;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        /* --- About & Footer --- */
+        .about {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: #f9f9f9;
+        }
+
+        .footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer a {
+            color: #f4b41a;
+            text-decoration: none;
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            /* Desktop links hide karein */
+            .hamburger {
+                display: block;
+            }
+
+            /* Hamburger dikhayein */
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-main">Tasty</span>
+            <span class="logo-accent">Bites</span>
+        </div>
+        <ul class="nav-links">
+
+            <li><a href="{% url 'home' %}">Home</a></li>
+
+            {% if request.user.is_authenticated %}
+
+            <!-- CUSTOMER LOGIN -->
+
+            <li><a href="{% url 'menu' %}">Menu</a></li>
+            <li><a href="{% url 'cart' %}">Cart</a></li>
+            <li><a href="{% url 'order_history'%}">Orderes</a></li>
+
+            
+
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+
+            {% elif request.session.delivery_id %}
+
+            <!-- DELIVERY BOY LOGIN -->
+
+            <li>
+                <a href="{% url 'delivery_dashboard' %}">
+                    Delivery Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'delivery_logout' %}">
+                    Logout
+                </a>
+            </li>
+
+            {% else %}
+
+            <!-- NOT LOGGED -->
+
+            <li><a href="{% url 'login' %}">Customer</a></li>
+            <li><a href="{% url 'login_view_ad' %}">Admin</a></li>
+            <li><a href="{% url 'delivery_login' %}">Delivery</a></li>
+
+            {% endif %}
+
+        </ul>
+
+
+        <div class="hamburger" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div id="sidebar" class="sidebar">
+        <div class="close-btn" onclick="toggleSidebar()">&times;</div>
+        <ul class="sidebar-links">
+            <li><a href="/home1" onclick="toggleSidebar()">Home</a></li>
+            <li><a href="/menu" onclick="toggleSidebar()">Menu</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'sign_up' %}">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to TastyBites</h1>
+            <p>Experience authentic Italian cuisine in a cozy, elegant setting.</p>
+            <a href="{% url 'reservation' %}" class="btn">Reserve a Table</a>
+        </div>
+    </section>
+
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            {% for item in items %}
+            <div class="swiper-slide">
+                <a href="{% url 'menu_detail' item.id %}">
+                    <center>
+                        {% if item.image %}
+                        <img src="{{ item.image.url }}" style="width:350px; height:200px; object-fit:cover;">
+                        {% else %}
+                        <img src="/static/images/default-placeholder.jpg"
+                            style="width:350px; height:200px; object-fit:cover;">
+                        {% endif %}
+
+                        <p style="margin-top:10px; font-weight:bold;">{{ item.item_name }}</p>
+                    </center>
+
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <center style="margin-bottom: 40px;">
+        <a href="/menu" class="btn">View Our Menu</a>
+    </center>
+
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>La TastyBites is a family-owned Indian restaurant dedicated to bringing rich and authentic flavors to your table.  
+We serve a variety of cuisines including South Indian, Gujarati, and delicious chicken dishes.  
+Our chefs use fresh, locally-sourced ingredients to create meals that are both traditional and flavorful.  
+Experience the taste of India with quality food, warm hospitality, and a homely atmosphere.
+        </p>
+    </section>
+
+    <footer id="contact" class="footer">
+        <p>La Bella Vita &copy; 2026 | 123 Culinary Lane, Food City</p>
+        <p><a href="mailto:info@labellavita.com">info@labellavita.com</a> | (123) 456-7890</p>
+        <p><a href="#">Facebook</a> | <a href="https://www.instagram.com/rajputmanish2737/">Instagram</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // Swiper Configuration
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+            }
+        });
+
+        // Sidebar Toggle Function
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MySite Login</title>
+  <style>
+    /* Reset and base styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    h1 {
+      color: #00e0ff;
+      margin-bottom: 30px;
+      text-shadow: 0 0 5px #00e0ff80;
+    }
+
+    /* Login box with glass effect */
+    .login-box {
+      width: 320px;
+      padding: 30px 25px;
+      background: rgba(255, 255, 255, 0.9);
+      /* Light background with transparency */
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: left;
+    }
+
+    .login-box h2 {
+      text-align: center;
+      color: #cd5c33;
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.05);
+      /* Light black background for inputs */
+      color: #333;
+      font-size: 14px;
+      outline: none;
+      transition: background 0.3s ease;
+    }
+
+    .login-box input::placeholder {
+      color: #aaa;
+    }
+
+    .login-box input:focus {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background-color: #00e0ff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-box button:hover {
+      background-color: #00e4fef1;
+    }
+
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #070404f5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Welcome to Testybyte</h1>
+
+  <div class="login-box">
+    <h2>Sign-up</h2>
+    <form action="{% url 'sign_up_ad' %}" method="POST">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="tel" name="phone" placeholder="Phone Number" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button href="login_adm.html">Sign up</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy;Testybyte. All rights reserved.
+  </footer>
+
+</body>
+
+</html>

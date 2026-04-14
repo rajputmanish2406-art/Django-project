@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MySite Login</title>
+  <link rel="stylesheet" href="{% static 'sign up.css' %}">
+</head>
+    
+  
+
+<body>
+
+  <h1>Welcome to TetyBites</h1>
+
+  <div class="login-box">
+    <h2>Sign-up</h2>
+    <form action="/sign_up" method="POST">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="tel" name="phone" placeholder="Phone Number" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button href="login.html">Sign up</button>
+    </form>
+  </div>
+  {% if error %}
+  <script>
+    alert("{{ error }}");
+  </script>
+  {% endif %}
+
+
+  <footer>
+    &copy;Testybyte. All rights reserved.
+  </footer>
+
+</body>
+
+</html>

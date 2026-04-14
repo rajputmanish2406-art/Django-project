@@ -1,0 +1,164 @@
+ body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #f7e8e8;
+            background: #121111;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f6f9;
+            color: #333;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f5ff;
+            */
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            margin-right: 5px;
+            margin: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .edit-btn {
+            background-color: #0a99f8;
+            color: white;
+        }
+        .add-btn {
+            background-color: aquamarine;
+            color: #0a99f8;
+            float: right;
+        }
+        .back-btn {
+            background-color: aquamarine;
+            color: #0a99f8;
+            float: left;
+        }
+
+        .delete-btn {
+            background-color: #ee1f08;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        @media (max-width: 500px) {
+
+            /* Force table to not be a table anymore */
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            /* Hide table headers (but keep for screen readers) */
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                background: #fff;
+            }
+
+            td {
+                /* Behave  like a "row" */
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50% !important;
+                text-align: right !important;
+            }
+
+            td:before {
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 12px;
+                left: 15px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+                text-align: left;
+            }
+
+            /* Label the data based on your specific columns */
+            td:nth-of-type(1):before {
+                content: "Item Name";
+            }
+
+            td:nth-of-type(2):before {
+                content: "Price";
+            }
+
+            td:nth-of-type(3):before {
+                content: "Category";
+            }
+
+            td:nth-of-type(4):before {
+                content: "Created By";
+            }
+
+            td:nth-of-type(5):before {
+                content: "Updated By";
+            }
+
+            td:nth-of-type(6):before {
+                content: "Updated At";
+            }
+
+            td:nth-of-type(7):before {
+                content: "Action";
+            }
+
+            .action-btn {
+                display: inline-block;
+                margin: 5px 2px;
+                width: 40%;
+                /* Makes buttons sit side-by-side on mobile */
+                text-align: center;
+            }
+
+        }

@@ -1,0 +1,102 @@
+/* Reset and base styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+   h1 {
+  color: #ff0000; /* Pure Red */
+  margin-bottom: 40px;
+  font-style: italic;
+  font-family: 'Georgia', serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  
+  /* Layered shadows for a real "glow" effect */
+  text-shadow: 
+    0 0 10px rgba(255, 0, 0, 0.7),
+    0 0 20px rgba(0, 224, 255, 0.4);
+    
+  /* Subtle entrance animation */
+ 
+}
+
+
+    /* Login box with glass effect */
+    .login-box {
+      width: 320px;
+      padding: 30px 25px;
+      background: rgba(255, 255, 255, 0.9);
+      /* Light background with transparency */
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: left;
+    }
+
+    .login-box h2 {
+      text-align: center;
+      color: #dc2019;
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.05);
+      /* Light black background for inputs */
+      color: #333;
+      font-size: 14px;
+      outline: none;
+      transition: background 0.3s ease;
+    }
+
+    .login-box input::placeholder {
+      color: #aaa;
+    }
+
+    .login-box input:focus {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background-color: #fc3903;
+      color: #e6d7d7;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-box button:hover {
+      background-color: #cf1313f1;
+    }
+
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #070404f5;
+    }

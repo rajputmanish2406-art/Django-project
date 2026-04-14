@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivery Dashboard</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#1e3c72,#2a5298);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Card container */
+.container{
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    text-align:center;
+    width:90%;
+    max-width:400px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Heading */
+h2{
+    margin-bottom:10px;
+    color:#333;
+}
+
+/* Order text */
+.orders{
+    font-size:18px;
+    margin-bottom:25px;
+    color:#666;
+}
+
+/* Buttons */
+.btn{
+    display:block;
+    text-decoration:none;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+/* View orders button */
+.orders-btn{
+    background:#28a745;
+    color:white;
+}
+
+.orders-btn:hover{
+    background:#218838;
+}
+
+/* Logout button */
+.logout-btn{
+    background:#dc3545;
+    color:white;
+}
+
+.logout-btn:hover{
+    background:#c82333;
+}
+
+/* Responsive */
+@media(max-width:500px){
+
+    .container{
+        padding:25px;
+    }
+
+    h2{
+        font-size:20px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Welcome {{ boy.name }}</h2>
+
+<p class="orders">Active Orders: {{ orders_count }}</p>
+
+<a class="btn orders-btn" href="{% url 'delivery_orders'%}">
+View Orders
+</a>
+
+<a class="btn logout-btn" href="{% url 'delivery_logout' %}">
+Logout
+</a>
+
+</div>
+
+</body>
+</html>

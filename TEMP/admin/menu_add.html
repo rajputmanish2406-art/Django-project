@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Menu Item</title>
+  <link rel="stylesheet" href="{% static 'menu.css' %}">
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      Add New Menu Item
+    </div>
+
+    <form method="post" enctype="multipart/form-data" class="form-content">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="item_name">Item Name *</label>
+        <input type="text" name="item_name" id="item_name" 
+               required autofocus placeholder="e.g. Butter Chicken">
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price (₹) *</label>
+        <input type="number" name="price" id="price" step="0.01" min="0" 
+               required placeholder="e.g. 320.00">
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category *</label>
+        <select name="category" id="category" required>
+          <option value="" disabled selected>Select category</option>
+          <option value="veg">Vegetarian</option>
+          <option value="Chicken">Chicken</option>
+          <option value="South Indian">South Indian</option>
+          <!-- Add more categories according to your menu -->
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea name="description" id="description" rows="4" 
+                  placeholder="Brief description, ingredients, spice level, etc..."></textarea>
+      </div>
+w
+      <div class="form-group">
+        <label for="image">Item Image (recommended)</label>
+        <input type="file" name="image" id="image" accept="image/*">
+        <div class="image-hint">Max 2MB • JPG, PNG, WebP recommended</div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Add Item</button>
+        <a href="{% url 'menu_list' %}" class="btn btn-secondary">Cancel</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

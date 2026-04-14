@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Order</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom:20px;
+}
+
+h2{
+    margin:0 0 15px 0;
+}
+
+.status{
+    font-weight:bold;
+    padding:6px 12px;
+    border-radius:20px;
+    display:inline-block;
+}
+
+.Pending{ background:#fff3cd; color:#856404; }
+.Accepted{ background:#d4edda; color:#155724; }
+.Out{ background:#cce5ff; color:#004085; }
+.Delivered{ background:#d1e7dd; color:#0f5132; }
+
+.progress{
+    display:flex;
+    justify-content:space-between;
+    margin:20px 0;
+}
+
+.step{
+    flex:1;
+    text-align:center;
+    position:relative;
+}
+
+.step::before{
+    content:'';
+    height:4px;
+    background:#ddd;
+    position:absolute;
+    top:12px;
+    left:-50%;
+    width:100%;
+    z-index:-1;
+}
+
+.step:first-child::before{
+    display:none;
+}
+
+.circle{
+    width:25px;
+    height:25px;
+    background:#ddd;
+    border-radius:50%;
+    margin:auto;
+}
+
+.active .circle{
+    background:#4CAF50;
+}
+
+.item{
+    border-bottom:1px solid #eee;
+    padding:10px 0;
+}
+
+.total{
+    text-align:right;
+    font-weight:bold;
+    font-size:18px;
+}
+
+@media(max-width:600px){
+    .progress{
+        flex-direction:column;
+        gap:15px;
+    }
+    .step::before{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <a href="{% url 'menu' %}">Back to Orders</a>
+
+<div class="card">
+<h2>Order #{{ order.id }}</h2>
+
+<p>Status:
+<span class="status {{ order.status }}">
+{{ order.status }}
+</span>
+</p>
+
+<!-- Progress Bar -->
+<div class="progress">
+    <div class="step {% if order.status == 'Pending' or order.status == 'Accepted' or order.status == 'Out for Delivery' or order.status == 'Delivered' %}active{% endif %}">
+        <div class="circle"></div>
+        <small>Pending</small>
+    </div>
+
+    <div class="step {% if order.status == 'Accepted' or order.status == 'Out for Delivery' or order.status == 'Delivered' %}active{% endif %}">
+        <div class="circle"></div>
+        <small>Accepted</small>
+    </div>
+
+    <div class="step {% if order.status == 'Out for Delivery' or order.status == 'Delivered' %}active{% endif %}">
+        <div class="circle"></div>
+        <small>Out</small>
+    </div>
+
+    <div class="step {% if order.status == 'Delivered' %}active{% endif %}">
+        <div class="circle"></div>
+        <small>Delivered</small>
+    </div>
+</div>
+
+</div>
+
+<div class="card">
+<h3>Ordered Items</h3>
+
+{% for item in order_items %}
+<div class="item">
+    <strong>{{ item.product.item_name }}</strong>
+    <p>₹{{ item.price }} × {{ item.quantity }}</p>
+    <p><strong>Subtotal: ₹{{ item.subtotal }}</strong></p>
+</div>
+{% empty %}
+<p>No items found</p>
+{% endfor %}
+
+<div class="total">
+Total Amount: ₹{{ order.total_amount }}
+</div>
+
+</div>
+
+<div class="card">
+<h3>Delivery Details</h3>
+
+{% if order.delivery_boy %}
+<p><strong>Name:</strong> {{ order.delivery_boy.name }}</p>
+<p><strong>Phone:</strong> {{ order.delivery_boy.phone }}</p>
+{% else %}
+<p style="color:orange;">Delivery boy not assigned yet</p>
+{% endif %}
+</div>
+
+</div>
+
+</body>
+</html>
