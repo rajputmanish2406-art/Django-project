@@ -10,14 +10,13 @@
 </head>
 
 <body>
-    <h2>Delivery Signup</h2>
     {% if error %}
     <script>
         alert("{{ error }}");
     </script>
     {% endif %}
     <div class="login-box">
-    <h2>Sign-up</h2>
+    <h2>Delivery Sign-up</h2>
     <form action="/sign_up" method="POST">
       {% csrf_token %}
       <input type="text" name="name" placeholder="Name" required>
