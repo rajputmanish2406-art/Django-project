@@ -201,7 +201,9 @@ def assign_order(request,id):
         boy.is_available=False
         boy.save()
 
-        return redirect('admin_order_detail',id=id)
+        # return redirect('admin_order_detail',id=id)
+        return redirect('admin_order_list')
+
 
     return render(request,'admin/assign_order.html',{
         'order':order,
