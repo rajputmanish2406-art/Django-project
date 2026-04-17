@@ -1,24 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Reports</h1>
-            <h4>1. Order Reports</h4>
-            <select onchange="location = this.value;">
-<option value="">Select Report</option>
-<option value="/report/orders/?filter=day">Today PDF</option>
-<option value="/report/orders/?filter=month">Month PDF</option>
-<option value="/report/orders/?filter=year">Year PDF</option>
-</select>
-              <h4>2. Menu Reports</h4>  
-            <a href="/report/menu/"><button>Menu PDF</button></a><br><br>
-            <h3>3. User PDf</h3>
-            <a href="/report/users/"><button> PDF</button></a>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports</title>
 
-    
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+h4, h3 {
+    margin-bottom: 10px;
+    color: #444;
+}
+
+select, button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+select {
+    background: #f1f1f1;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📊 Reports Dashboard</h1>
+
+    <!-- Order Reports -->
+    <div class="card">
+        <h4>1. Order Reports</h4>
+        <select onchange="location = this.value;">
+            <option value="">Select Report</option>
+            <option value="/report/orders/?filter=day">Today PDF</option>
+            <option value="/report/orders/?filter=month">Month PDF</option>
+            <option value="/report/orders/?filter=year">Year PDF</option>
+        </select>
+    </div>
+
+    <!-- Menu Reports -->
+    <div class="card">
+        <h4>2. Menu Reports</h4>
+        <a href="/report/menu/">
+            <button>Download Menu PDF</button>
+        </a>
+    </div>
+
+    <!-- User Reports -->
+    <div class="card">
+        <h3>3. User Reports</h3>
+        <a href="/report/users/">
+            <button>Download User PDF</button>
+        </a>
+    </div>
+
+</div>
+
 </body>
 </html>

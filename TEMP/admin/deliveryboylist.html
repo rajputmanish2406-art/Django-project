@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'TableAdmin.css' %}">
+</head>
+<body>
+    <h2>Delivery Boys</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Delivery Boy ID</th>
+                <th>Delivery Boy Name</th>
+                <th>Delivery Boy Phone</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for boy in delivery_boys %}
+            <tr>
+                <td style="width:20px;">#{{boy.id}}</td>
+                <td>{{boy.name}}</td>
+                <td>{{boy.phone}}</td>
+               
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    
+</body>
+</html>

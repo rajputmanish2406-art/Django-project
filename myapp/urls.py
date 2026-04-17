@@ -3,7 +3,7 @@ from django.urls import path
 # Customer
 from myapp.views.customer import home,home1,menu,menu_detail,sign_up,login_view,logout_view,cart_page,add_to_cart,update_cart,remove_item,checkout,place_order, payu_payment,payment_success,track_order,my_track_order,order_history,table_reservation
 # Admin 
-from myapp.views.admin import admindash,login_view_admin,sign_up_admin,logout_view_admin,menu_list,menu_add,menu_edit,menu_delete,admin_order_list,admin_order_detail,admin_order_status, assign_order,cust_list,orders_report_pdf,menu_report_pdf,users_report_pdf,Report
+from myapp.views.admin import admindash,login_view_admin,sign_up_admin,logout_view_admin,menu_list,menu_add,menu_edit,menu_delete,admin_order_list,admin_order_detail,admin_order_status, assign_order,cust_list,orders_report_pdf,menu_report_pdf,users_report_pdf,Report,delivery_boy_list
 # Delivery
 from myapp.views.delivery import delivery_signup,delivery_login,delivery_dashboard,delivery_logout,delivery_complete,delivery_orders
 # added manually
@@ -47,9 +47,11 @@ urlpatterns = [
     # Manage the Oder
     path('dashboard/orders/',admin_order_list, name='admin_order_list'),
     path('dashboard/orders/<int:id>/',admin_order_detail, name='admin_order_detail'),
+    path('dashboard/orders/<int:id>/',admin_order_detail, name='admin_order_detail'),
     path('dashboard/orders/status/<int:id>/',admin_order_status, name='admin_order_status'),
     path('order/assign/<int:id>/', assign_order, name='assign_order'),
     path('customerlist',cust_list,name='cust_list'),
+    path('delivery-boys/', delivery_boy_list, name='delivery_boy_list'),
     #Repoert 
     path("report/orders/", orders_report_pdf, name="orders_report"),
     path("report/menu/", menu_report_pdf, name="menu_report"),

@@ -54,6 +54,10 @@ def admindash(request):
 def cust_list(request):
     customer =Customer.objects.all()
     return render(request, 'admin/customer_list.html', {'customer': customer})
+# delivery boy show list here
+def delivery_boy_list(request):
+    delivery_boys = DeliveryBoy.objects.all()
+    return render(request, 'admin/deliveryboylist.html', {'delivery_boys': delivery_boys})
 # Signup view here Admin
 def sign_up_admin(request):
     if request.method == "POST":

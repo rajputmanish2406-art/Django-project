@@ -104,13 +104,13 @@
 
   <div class="login-box">
     <h2>Sign-up</h2>
-    <form action="{% url 'sign_up_ad' %}" method="POST">
+    <form action="{% url 'sign_up_ad' %}"  method="POST">
       {% csrf_token %}
       <input type="text" name="name" placeholder="Name" required>
       <input type="tel" name="phone" placeholder="Phone Number" required>
       <input type="email" name="email" placeholder="Email" required>
       <input type="password" name="password" placeholder="Password" required>
-      <button href="login_adm.html">Sign up</button>
+      <button type="submit">Sign up</button>
     </form>
   </div>
 

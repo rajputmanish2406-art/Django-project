@@ -264,7 +264,7 @@
             <li><a href="{% url 'cart' %}">Cart</a></li>
             <li><a href="{% url 'order_history'%}">Orderes</a></li>
 
-            
+
 
             <li><a href="{% url 'logout' %}">Logout</a></li>
 
@@ -307,14 +307,29 @@
     <div id="sidebar" class="sidebar">
         <div class="close-btn" onclick="toggleSidebar()">&times;</div>
         <ul class="sidebar-links">
-            <li><a href="/home1" onclick="toggleSidebar()">Home</a></li>
-            <li><a href="/menu" onclick="toggleSidebar()">Menu</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}">Logout</a></li>
+
+            <!-- Common for all users -->
+            <li><a href="{% url 'home' %}" onclick="toggleSidebar()">Home</a></li>
+            <li><a href="{% url 'menu' %}" onclick="toggleSidebar()">Menu</a></li>
+
+            {% if request.user.is_authenticated %}
+            <!-- CUSTOMER -->
+            <li><a href="{% url 'cart' %}" onclick="toggleSidebar()">Cart</a></li>
+            <li><a href="{% url 'order_history' %}" onclick="toggleSidebar()">Orders</a></li>
+            <li><a href="{% url 'logout' %}" onclick="toggleSidebar()">Logout</a></li>
+
+            {% elif request.session.delivery_id %}
+            <!-- DELIVERY -->
+            <li><a href="{% url 'delivery_dashboard' %}" onclick="toggleSidebar()">Dashboard</a></li>
+            <li><a href="{% url 'delivery_logout' %}" onclick="toggleSidebar()">Logout</a></li>
+
             {% else %}
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'sign_up' %}">Sign Up</a></li>
+            <!-- NOT LOGGED -->
+            <li><a href="{% url 'login' %}" onclick="toggleSidebar()">Customer Login</a></li>
+            <li><a href="{% url 'login_view_ad' %}" onclick="toggleSidebar()">Admin Login</a></li>
+            <li><a href="{% url 'delivery_login' %}" onclick="toggleSidebar()">Delivery Login</a></li>
             {% endif %}
+
         </ul>
     </div>
 
@@ -354,10 +369,11 @@
 
     <section id="about" class="about">
         <h2>About Us</h2>
-        <p>La TastyBites is a family-owned Indian restaurant dedicated to bringing rich and authentic flavors to your table.  
-We serve a variety of cuisines including South Indian, Gujarati, and delicious chicken dishes.  
-Our chefs use fresh, locally-sourced ingredients to create meals that are both traditional and flavorful.  
-Experience the taste of India with quality food, warm hospitality, and a homely atmosphere.
+        <p>La TastyBites is a family-owned Indian restaurant dedicated to bringing rich and authentic flavors to your
+            table.
+            We serve a variety of cuisines including South Indian, Gujarati, and delicious chicken dishes.
+            Our chefs use fresh, locally-sourced ingredients to create meals that are both traditional and flavorful.
+            Experience the taste of India with quality food, warm hospitality, and a homely atmosphere.
         </p>
     </section>
 

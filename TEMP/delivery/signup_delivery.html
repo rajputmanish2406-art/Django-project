@@ -17,12 +17,12 @@
     {% endif %}
     <div class="login-box">
     <h2>Delivery Sign-up</h2>
-    <form action="/sign_up" method="POST">
+    <form action="{% url 'delivery_signup' %}" method="POST">
       {% csrf_token %}
       <input type="text" name="name" placeholder="Name" required>
       <input type="tel" name="phone" placeholder="Phone Number" required>
       <input type="password" name="password" placeholder="Password" required>
-      <button href="signup_delivery.html">Sign up</button>
+      <button type="submit">Sign up</button>
     </form>
   </div>
 
